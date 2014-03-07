@@ -11,7 +11,8 @@ angular.module('myApp.routes', ['ngRoute'])
       });
 
       $routeProvider.when('/chat', {
-         templateUrl: 'partials/chat.html',
+          authRequired: true, // must authenticate before viewing this page
+          templateUrl: 'partials/chat.html',
          controller: 'ChatCtrl'
       });
 

@@ -7,7 +7,15 @@ angular.module('myApp.controllers', [])
       syncData('syncedValue').$bind($scope, 'syncedValue');
    }])
 
-  .controller('ChatCtrl', ['$scope', 'syncData', function($scope, syncData) {
+  .controller('ChatCtrl', ['$scope', 'syncData', function ($scope, syncData) {
+      $scope.syncAccount = function () {
+          $scope.user = {};
+          syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user').then(function (unBind) {
+              $scope.unBindAccount = unBind;
+          });
+      };
+      $scope.syncAccount();
+
       $scope.newMessage = null;
 
       // constrain number of messages by limit into syncData
@@ -17,7 +25,7 @@ angular.module('myApp.controllers', [])
       // add new messages to the list
       $scope.addMessage = function() {
          if( $scope.newMessage ) {
-            $scope.messages.$add({text: $scope.newMessage});
+            $scope.messages.$add({text: $scope.newMessage, id: $scope.auth.user.id, name: $scope.user.name}); 
             $scope.newMessage = null;
          }
       };
@@ -79,7 +87,8 @@ angular.module('myApp.controllers', [])
       }
    }])
 
-   .controller('AccountCtrl', ['$scope', 'loginService', 'changeEmailService', 'firebaseRef', 'syncData', '$location', 'FBURL', function($scope, loginService, changeEmailService, firebaseRef, syncData, $location, FBURL) {
+   .controller('AccountCtrl', ['$scope', 'loginService', 'changeEmailService', 'firebaseRef', 'syncData', '$location', 'FBURL',
+       function ($scope, loginService, changeEmailService, firebaseRef, syncData, $location, FBURL) {
       $scope.syncAccount = function() {
          $scope.user = {};
          syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user').then(function(unBind) {

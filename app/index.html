@@ -3,22 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body ng-cloak>
 
-  <ul class="menu">
-    <li><a href="#/home">home</a></li>
-    <li><a href="#/chat">chat</a></li>
-    <li ng-show-auth="['logout','error']"><a href="#/login">login</a></li>
-    <li ng-show-auth="'login'"><a href="#/account">account</a></li>
-  </ul>
+    <div class="container">
+        <div class="row">
 
-  <div ng-view></div>
+            <ul class="menu">
+                <li><a href="#/home">home</a></li>
+                <li><a href="#/chat">chat</a></li>
+                <li ng-show-auth="['logout','error']"><a href="#/login">login</a></li>
+                <li ng-show-auth="'login'"><a href="#/account">account</a></li>
+            </ul>
 
-  <div>AngularFire-seed v<span app-version></span></div>
+            <div ng-view></div>
 
-  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+            <footer>
+                <div>AngularFire-seed v<span app-version></span></div>
+            </footer>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
   <script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js"></script>
